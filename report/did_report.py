@@ -1,8 +1,8 @@
-import os
 import time
 import datetime
 
-import util.db_util as db_util
+from util import db_util
+from util import email_util
 import util.csv_util as csv_util
 
 group_keys = '"bidaobi","liangjianshequ","HaXiSQ","xiaomutu","touhaowanjia8","xiaochizi12345678","LSMM8","JCJ9527",' \
@@ -15,9 +15,13 @@ group_keys = '"bidaobi","liangjianshequ","HaXiSQ","xiaomutu","touhaowanjia8","xi
              '"Weidushequchina","mumarensq","MysteryDaily1","cxsqcb","longzuqkl","windstormSQ","BiYouSQ","jingouss",' \
              '"BIYINGSQ","tiedaoyoujidui" '
 
+to_email = "aaron@youxiang.io,java@youxiang.io"
+to_email = "java@youxiang.io,hack@youxiang.io,seb@youxiang.io"
+
 
 def did_report():
     try:
+        # Step1：查询社区DID数据
         connection = db_util.get_btok_connection()
         cursor = connection.cursor()
         sql = """SELECT t2.group_key '群key',t1.did_id '钱包ID',t1.name 'DID佩戴币种',t1.did_time 'DID开通时间',t3.create_time '注册时间'  FROM 
@@ -42,12 +46,18 @@ def did_report():
 
         print("data size=", len(result))
 
+        # Step2 生成csv文件
         TD = datetime.date.today()
         csv_dir = csv_util.get_csv_path("did")
         file_name = "DidGroupData_%s_%d.csv" % (TD, time.time())
         file_path = csv_dir + "/" + file_name
         column_names = [desc[0] for desc in cursor.description]
         csv_util.to_csv_file(file_path, column_names, result)
+
+        # Step3 发送email
+        subject = "社区DID数据_%s" % TD
+        body = "数据见附件"
+        email_util.send_attachment_email(subject, body, to_email, file_path, file_name)
 
         print("did report success!")
 
