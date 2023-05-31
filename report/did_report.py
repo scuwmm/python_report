@@ -43,13 +43,7 @@ def did_report():
         print("data size=", len(result))
 
         TD = datetime.date.today()
-        current_file = os.path.abspath(__file__)
-        # 获取当前执行文件的相对目录
-        current_dir = os.path.dirname(current_file)
-        # 获取当前执行文件所在的父级文件夹路径
-        parent_dir = os.path.dirname(current_dir)
-        # 构建目标相对目录路径
-        csv_dir = os.path.join(parent_dir, "csv", "did")
+        csv_dir = csv_util.get_csv_path("did")
         file_name = "DidGroupData_%s_%d.csv" % (TD, time.time())
         file_path = csv_dir + "/" + file_name
         column_names = [desc[0] for desc in cursor.description]
