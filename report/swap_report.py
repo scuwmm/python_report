@@ -62,6 +62,8 @@ def swap_report():
         btok_cursor.execute(result_sql)
         result = btok_cursor.fetchall()
 
+        print("data size=", len(result))
+
         # Step5: 将数据导成csv文件
         # 获取当前执行文件的绝对路径
         TD = datetime.date.today()
@@ -71,7 +73,7 @@ def swap_report():
         # 获取当前执行文件所在的父级文件夹路径
         parent_dir = os.path.dirname(current_dir)
         # 构建目标相对目录路径
-        csv_dir = os.path.join(parent_dir, "csv")
+        csv_dir = os.path.join(parent_dir, "csv", "swap")
         file_name = "SwapData_%s_%d.csv" % (TD, time.time())
         file_path = csv_dir + "/" + file_name
         column_names = [desc[0] for desc in btok_cursor.description]
