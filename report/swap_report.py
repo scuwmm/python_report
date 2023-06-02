@@ -6,8 +6,8 @@ import util.csv_util as csv_util
 import util.email_util as email_util
 import datetime
 
-# to_email = "aaron@youxiang.io"
-to_email = "java@youxiang.io,hack@youxiang.io,seb@youxiang.io"
+to_email = "aaron@youxiang.io"
+# to_email = "java@youxiang.io,hack@youxiang.io,seb@youxiang.io"
 
 
 # 将node库中的数据导入到btok库中（两张table结构完全一致）
@@ -54,9 +54,10 @@ def swap_report():
                 LEFT JOIN biyong_main.telegram_group tg on tsr.`source`= tg.group_id
                 LEFT JOIN biyong_main.erc20_contract ec_src on ec_src.contract_id=tsr.src_token
                 LEFT JOIN biyong_main.erc20_contract ec_dst on ec_dst.contract_id=tsr.dst_token
-                WHERE tsr.id > %d
                 order by tsr.id desc
-                ;""" % max_id
+                limit 50000
+                ;"""
+        # WHERE tsr.id > % d  ||  % max_id
         btok_cursor.execute(result_sql)
         result = btok_cursor.fetchall()
 
