@@ -6,10 +6,11 @@ import util.csv_util as csv_util
 import util.email_util as email_util
 import datetime
 
-to_email = "aaron@youxiang.io"
-# to_email = "java@youxiang.io,hack@youxiang.io,seb@youxiang.io"
+# to_email = "aaron@youxiang.io"
+to_email = "java@youxiang.io,hack@youxiang.io,seb@youxiang.io"
 
 
+# 目前导出所有数据，未来数据量大了之后需要增量推送
 # 将node库中的数据导入到btok库中（两张table结构完全一致）
 def swap_report():
     try:
