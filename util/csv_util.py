@@ -15,9 +15,9 @@ def get_csv_path(child_dir):
     return csv_dir
 
 
-# 将数据生成csv文件
+# 将数据生成csv文件，utf-8-sig支持中文
 def to_csv_file(file, column_names, result):
-    with open(file, 'w', newline='') as csvfile:
+    with open(file, 'w', newline='',encoding='utf-8-sig') as csvfile:
         writer = csv.writer(csvfile)
 
         # 写入列名
