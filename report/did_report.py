@@ -15,7 +15,7 @@ group_keys = '"bidaobi","liangjianshequ","HaXiSQ","xiaomutu","touhaowanjia8","xi
              '"Weidushequchina","mumarensq","MysteryDaily1","cxsqcb","longzuqkl","windstormSQ","BiYouSQ","jingouss",' \
              '"BIYINGSQ","tiedaoyoujidui" '
 
-to_email = "aaron@youxiang.io,java@youxiang.io"
+# to_email = "aaron@youxiang.io,java@youxiang.io"
 to_email = "java@youxiang.io,hack@youxiang.io,seb@youxiang.io"
 
 
